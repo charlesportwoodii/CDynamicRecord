@@ -58,7 +58,8 @@ class CDynamicRecord extends CActiveRecord
     private function overrideDbConnection()
     {
         Yii::app()->db->setActive(false);
-        Yii::app()->db->connectionString = str_replace('base', $this->dbConnectionString, Yii::app()->db->connectionString);
+        # MODIFY YOUR CDBCONNECTIONSTRING HERE
+        #Yii::app()->db->connectionString = str_replace('base', $this->dbConnectionString, Yii::app()->db->connectionString);
         Yii::app()->db->setActive(true);
         
         return true;
