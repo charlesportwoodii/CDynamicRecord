@@ -1,6 +1,6 @@
 ## CDynamicRecord
 
-CDynamicRecord is an ActiveRecord implementation for Yii that allows for an abstract class to connect to multiple databases tables of the same type across multiple databases using the same ActiveRecord method calls as you would for a normal ActiveRecord class. This means that you can have multiple models of the same class connecting to two different databases at the same time.
+CDynamicRecord is an ActiveRecord implementation for Yii that allows you access two identical database tables across multiple databases through a single model rather than creating multiple models for each database. CDynamicRecord has the same behaviors/syntax and CActiveRecord
 
 ### Why I Built This
 I built this because I wanted 1 codebase for the entire project and didn't want to have multiple classes with a slightly altered CDbConnectionString in order to access them. This was easier than that. I didn't want to instantiate a new copy of the application every time I wanted to make another db copy.
@@ -152,4 +152,43 @@ So now, I can do this:
 $foo = Foo(1);
 $foo2 = Foo(2);
 $foo3 = Foo::model(1);
+~~~
+
+
+# CDynamicRecordSDB
+
+CDynamicRecordSDB is the same thing as CDynamicRecord, except instead of working with identical tables across multiple databases, it works with multiple tables in the same database. The structures must be 100% identical.
+
+Setup is identical to CDynamicRecord, the only difference is that instead of extending CDynamicRecord, you extend CDynamicRecordSDB. 
+
+### Examples
+
+~~~
+// test.php
+
+Yii::import('ext.CDynamicRecord.*');
+class Test extends CDynamicRecordSDB
+{
+    public static function model($dbConnectionString = 0, $className=__CLASS__)
+    {
+        return parent::model($dbConnectionString, $className);
+    }
+
+
+    public function tableName()
+    {
+    return $this->dbConnectionString;
+    }
+
+     [... Do everything else after this ...]
+}
+~~~
+
+And then the callback looks like:
+
+~~~
+$data = new Test('tbl_name');
+$data2 = Test::model('tbl_name');
+$data3 = Test::model('tbl_name2');
+$data3 = new Test('tbl_name2');
 ~~~
