@@ -10,7 +10,9 @@
  */
  
 /**
- * CDynamicRecord is a dynamic ActiveRecord class that, upon instantiation creates a dynamic database connection to a specified world
+ * CDynamicRecordSDB provides functionality to talk to multiple tables with the same structure in 
+ * multiple databases  by only using one model rather than creating a unique model for each table.
+ * 
  * CDynamicRecord can be called by both the following definitions
  * $model = new CDynamicRecord($dbConnectionString)
  * $data  = CDynamicRecord::model($dbConnectionString)->method()->param
