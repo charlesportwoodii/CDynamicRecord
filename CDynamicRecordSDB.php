@@ -10,10 +10,12 @@
  */
  
 /**
- * CDynamicRecordSDB provides functionality to talk to multiple tables with the same structure in the same database by only using one model rather than creating a unique model for each table.
+ * CDynamicRecordSDB provides functionality to talk to multiple tables with the same structure in the same database by 
+ * only using one model rather than creating a unique model for each table.
+ * 
  * CDynamicRecord can be called by both the following definitions
- * $model = new CDynamicRecord($dbConnectionString)
- * $data  = CDynamicRecord::model($dbConnectionString)->method()->param
+ * $model = new CDynamicRecord($tableName)
+ * $data  = CDynamicRecord::model($tableName)->method()->param
  * 
  * This class has to fully reimplement ActiveRecord so that everything works. I never was able to figure out why Class Inheritance wouldn't work after I changed model()
  * @See CActiveRcord
